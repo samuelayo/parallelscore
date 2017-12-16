@@ -20,4 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/investor/dashboard','InvestmentController@dashboard');
+
 Route::get('/founder/dashboard','FoundersController@dashboard');
+
+Route::get('/search/investment','InvestmentController@search_investment');
+

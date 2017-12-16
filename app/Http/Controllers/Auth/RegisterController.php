@@ -93,6 +93,8 @@ class RegisterController extends Controller
 	    {
 	
 		if($data['type'] =="founder"){
+            
+			$this->handleFounder($data);
             session(['type'=> null]);
 			return $this->handleFounder($data);
             

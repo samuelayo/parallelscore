@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\companies;
 use Illuminate\Http\Request;
 
 class InvestmentController extends Controller
@@ -15,7 +16,21 @@ class InvestmentController extends Controller
 
 
     public function dashboard(){
-        return "hello";
+        $companies = companies::paginate('15');
+        $amount = "Amount";
+        return view('investor.dashboard')->with(compact('companies','amount'));
+    }
+
+    public function search_investment(Request $request){
+        $this->validate($request,[
+            'amount' => 'required|numeric'
+        ]);
+
+        //after validation carry out the search
+        $companies = companies::wherebetween("company_amount",[0,$request->amount])->paginate(15);
+        $amount = $request->amount;
+
+        return view('investor.dashboard')->with(compact('companies','amount'));
     }
 
 }
