@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //this is where we land after authentication
+        if(auth()->user()->type == "investor"){
+            return redirect()->to('/investor/dashboard');
+        }
         return view('home');
     }
 }

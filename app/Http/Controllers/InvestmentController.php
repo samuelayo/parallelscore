@@ -7,4 +7,10 @@ use Illuminate\Http\Request;
 class InvestmentController extends Controller
 {
     //
+
+    public function __construct()
+    {
+        $this->middleware('investor');
+    }
+
 }
