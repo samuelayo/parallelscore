@@ -7,7 +7,6 @@ use App\companies;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -92,11 +91,11 @@ class RegisterController extends Controller
 	     */
 	    protected function create(array $data)
 	    {
-		
+	
 		if($data['type'] =="founder"){
-            
-			$this->handleFounder($data);
             session(['type'=> null]);
+			return $this->handleFounder($data);
+            
 		}
 		else{
 			return User::create([
@@ -117,16 +116,38 @@ class RegisterController extends Controller
                     'password' => bcrypt($founder['password']),
                     'type' => $founder['type']
 			    ]);
-
+     
       $companies = new companies();
       $companies->company_name = $founder['company_name'];
       $companies->company_phone = $founder['company_phone'];
       $companies->company_about = $founder['company_about'];
       $companies->company_amount = $founder['company_amount'];
       $companies->company_url = $founder['company_url'];
-      
-      
+      $companies->company_mission = $founder['company_mission'];
+      $companies->company_address = $founder['company_address'];
+      $companies->company_vision = $founder['company_vision'];
+      $companies->user_id = $user->id;
+      $fileName = 'null';
+    // if (Input::file($founder['company_logo'])->isValid()) {
+    //     $destinationPath = public_path('uploads/logo');
+    //     $extension = Input::file($founder['company_logo'])->getClientOriginalExtension();
+    //     $fileName = uniqid().'.'.$extension;
+
+    //     Input::file('image')->move($destinationPath, $fileName);
+    // }
+    // $companies->company_logo= $filename;
+     
+      $companies->save();
       return $user;
 		
 	}
+
+    public function postRegister(Request $request)
+{
+    dd($request);
+
+    Auth::login($this->create($request->all()));
+
+    return redirect($this->redirectPath());
+}
 }

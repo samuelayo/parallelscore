@@ -16,8 +16,8 @@ class AlterCompanyTable extends Migration
         Schema::table('companies', function (Blueprint $table) {
             //
         
-             $table->string('company_vision')->nullable();
-             $table->string('company_mission')->nullable();
+             $table->text('company_vision')->nullable();
+             $table->text('company_mission')->nullable();
         });
     }
 

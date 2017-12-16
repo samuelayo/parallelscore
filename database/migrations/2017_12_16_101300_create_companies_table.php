@@ -22,11 +22,11 @@ class CreateCompaniesTable extends Migration
             ->onDelete('cascade');
             $table->string('company_logo')->nullable();
             $table->string('company_name')->nullable();
-            $table->string('company_about')->nullable();
+            $table->text('company_about')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('company_amount')->nullable();
             $table->string('company_url')->nullable();
-            $table->string('company_address')->nullable();
+            $table->text('company_address')->nullable();
             $table->timestamps();
         });
     }

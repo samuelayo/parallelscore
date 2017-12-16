@@ -11,23 +11,6 @@
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Investor or Founder?</label>
-
-                            <div class="col-md-6">
-                                <select  type="password" class="form-control" name="type" required>
-                                    <option value="investor"> Investor </option>
-                                    <option value="founder"> Founder </option>
-                                </select>
-
-                                @if ($errors->has('type'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('type') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 

@@ -26,6 +26,8 @@ class HomeController extends Controller
         //this is where we land after authentication
         if(auth()->user()->type == "investor"){
             return redirect()->to('/investor/dashboard');
+        }else{
+             return redirect()->to('/founder/dashboard');
         }
         return view('home');
     }
