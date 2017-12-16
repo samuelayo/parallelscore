@@ -19,9 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/investor/dashboard','InvestmentController@dashboard');
+Route::get('/investor/dashboard','InvestmentController@dashboard')->middleware('auth');
 
-Route::get('/founder/dashboard','FoundersController@dashboard');
+Route::get('/founder/dashboard','FoundersController@dashboard')->middleware('auth');
 
-Route::get('/search/investment','InvestmentController@search_investment');
+Route::get('/search/investment','InvestmentController@search_investment')->middleware('auth');
 
