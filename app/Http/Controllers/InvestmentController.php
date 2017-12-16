@@ -33,4 +33,10 @@ class InvestmentController extends Controller
         return view('investor.dashboard')->with(compact('companies','amount'));
     }
 
+    public function view_company($id){
+        $company = companies::where('id',$id)->first();
+
+        return view('investor.company')->with(compact('company'));
+    }
+
 }

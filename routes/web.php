@@ -25,3 +25,5 @@ Route::get('/founder/dashboard','FoundersController@dashboard')->middleware('aut
 
 Route::get('/search/investment','InvestmentController@search_investment')->middleware('auth');
 
+Route::get('/view/company/{id}','InvestmentController@view_company')->middleware('auth');
+
