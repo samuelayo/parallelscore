@@ -57,7 +57,7 @@ class RegisterController extends Controller
             
 			return Validator::make($data, [
 			            'name' => 'required|string|max:255',
-			            'email' => 'required|string|email|max:255|unique:users',
+			            'email' => 'required|string|email|max:255',
 			            'password' => 'required|string|min:6|confirmed',
 			            'type' => 'required|string'
 			        ]);
@@ -66,11 +66,10 @@ class RegisterController extends Controller
              session(['type'=> 'founder']);
 			return Validator::make($data, [
 			            'name' => 'required|string|max:255',
-			            'email' => 'required|string|email|max:255|unique:users',
+			            'email' => 'required|string|email|max:255',
 			            'password' => 'required|string|min:6|confirmed',
 			            'type' => 'required|string',
-                        'company_phone'=>'required|string|min:11',
-                        'company_phone'=>'required|string|min:11',
+                        'company_phone'=>'required|string|min:11|max:11',
                         'company_amount'=>'required|string',
                         'company_url'=>'required|string',
                         'company_about'=>'required|string',
