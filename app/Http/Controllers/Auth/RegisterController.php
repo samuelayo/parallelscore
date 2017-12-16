@@ -119,8 +119,11 @@ class RegisterController extends Controller
 			    ]);
 
       $companies = new companies();
-      $companies->name = $founder['company_name'];
-      $companies->name = $founder['company_name'];
+      $companies->company_name = $founder['company_name'];
+      $companies->company_phone = $founder['company_phone'];
+      $companies->company_about = $founder['company_about'];
+      $companies->company_amount = $founder['company_amount'];
+      $companies->company_url = $founder['company_url'];
       
       
       return $user;

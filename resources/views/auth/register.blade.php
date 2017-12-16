@@ -17,11 +17,10 @@
                             <div class="col-md-6">
                                 <select  type="password" class="form-control" name="type" required onchange="showcompany(this)">
                                     <option value="investor"> Investor </option>
-                                     @if (session('type'))
-                                    <option value="founder" selected> Founder </option>
-                                    else
-                                    <option value="founder"> Founder </option>
-                                    @endif
+                                     
+                                    <option value="founder" @if (session('type')) selected @endif> Founder </option>
+                                
+                                    
                                     
                                 </select>
 
