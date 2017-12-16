@@ -155,7 +155,7 @@
                         <span class="float-right">Joined in {{ \Carbon\Carbon::parse($company->created_at)->diffForHumans() }}</span>
                         <span><i class=""></i>
                             @if($company->investments)
-                            {{ $company->investments->count }}
+                            {{ $company->investments->count() }}
                                 @else
                                 0
                                 @endif
