@@ -17,7 +17,12 @@
                             <div class="col-md-6">
                                 <select  type="password" class="form-control" name="type" required onchange="showcompany(this)">
                                     <option value="investor"> Investor </option>
+                                     @if (session('type'))
+                                    <option value="founder" selected> Founder </option>
+                                    else
                                     <option value="founder"> Founder </option>
+                                    @endif
+                                    
                                 </select>
 
                                 @if ($errors->has('type'))
@@ -78,7 +83,13 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        <div id="showfounder" style="display:none;">
+                        <div id="showfounder"
+                         @if (session('type'))
+                         style="display:block;"
+                         @else
+                         style="display:none;"
+                         @endif
+                         >
                             <hr/>
                             <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Company Name</label>
@@ -192,7 +203,7 @@
                                 <label for="password" class="col-md-4 control-label">Company Vision</label>
 
                                 <div class="col-md-6">
-                                    <textarea type="text" class="form-control" name="company_address"  >
+                                    <textarea type="text" class="form-control" name="company_vision"  >
                                     {{ old('company_vision') }}
                                     </textarea>
 

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\companies;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -52,7 +54,8 @@ class RegisterController extends Controller
 	    protected function validator(array $data)
 	    {
 		
-		if($data->type != "founder"){
+		if($data['type'] != "founder"){
+            
 			return Validator::make($data, [
 			            'name' => 'required|string|max:255',
 			            'email' => 'required|string|email|max:255|unique:users',
@@ -61,12 +64,20 @@ class RegisterController extends Controller
 			        ]);
 		}
 		else{
+             session(['type'=> 'founder']);
 			return Validator::make($data, [
 			            'name' => 'required|string|max:255',
 			            'email' => 'required|string|email|max:255|unique:users',
 			            'password' => 'required|string|min:6|confirmed',
 			            'type' => 'required|string',
                         'company_phone'=>'required|string|min:11',
+                        'company_phone'=>'required|string|min:11',
+                        'company_amount'=>'required|string',
+                        'company_url'=>'required|string',
+                        'company_about'=>'required|string',
+                        'company_address'=>'required|string',
+                        'company_mission'=>'required|string',
+
 			        ]);
 		}
 		
@@ -82,20 +93,37 @@ class RegisterController extends Controller
 	    protected function create(array $data)
 	    {
 		
-		if($data->type=="founder"){
+		if($data['type'] =="founder"){
+            
 			$this->handleFounder($data);
+            session(['type'=> null]);
 		}
 		else{
 			return User::create([
 			            'name' => $data['name'],
 			            'email' => $data['email'],
 			            'password' => bcrypt($data['password']),
+                        'type' => $data['type']
 			        ]);
 		}
 		
 	}
 	
 	protected function handleFounder($founder){
+
+       $user =  User::create([
+                    'name' => $founder['name'],
+                    'email' => $founder['email'],
+                    'password' => bcrypt($founder['password']),
+                    'type' => $founder['type']
+			    ]);
+
+      $companies = new companies();
+      $companies->name = $founder['company_name'];
+      $companies->name = $founder['company_name'];
+      
+      
+      return $user;
 		
 	}
 }
