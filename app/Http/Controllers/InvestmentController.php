@@ -13,4 +13,9 @@ class InvestmentController extends Controller
         $this->middleware('investor');
     }
 
+
+    public function dashboard(){
+        return "hello";
+    }
+
 }

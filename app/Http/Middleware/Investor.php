@@ -15,9 +15,14 @@ class Investor
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->type == "investor")
-        return $next($request);
-        else
-            abort(404);
+        if(auth()->check()) {
+            if (auth()->user()->type == "investor")
+                return $next($request);
+            else
+                abort(404);
+        }
+        abort(404);
+
+
     }
 }
